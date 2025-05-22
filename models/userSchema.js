@@ -9,7 +9,7 @@ const userSchema = mongoose.Schema({
     type: String,
     required: true,
   },
-//   concerts: [concertSchema],
+  concerts: [concertSchema],
 });
 
 userSchema.set('toJSON', {
