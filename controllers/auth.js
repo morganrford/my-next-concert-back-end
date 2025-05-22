@@ -4,7 +4,7 @@ const bcrypt = require('bcrypt');
 const User = require('../models/userSchema');
 const jwt = require('jsonwebtoken');
 
-//Sign In
+//Sign In - pull request trial
 
 router.post('/sign-in', async (req, res) => {
   try {
