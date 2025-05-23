@@ -15,9 +15,6 @@ const bandSchema = mongoose.Schema({
     },
 })
 
-const Band = mongoose.model('Band', bandSchema)
-
-module.exports = Band
 
 const concertSchema = mongoose.Schema({
     venueName: {
@@ -47,6 +44,12 @@ const concertSchema = mongoose.Schema({
     bands: [bandSchema],
 })
 
-const Concert = mongoose.model('Concert', concertSchema)
+const Band = mongoose.model('Band', bandSchema);
+const Concert = mongoose.model('Concert', concertSchema);
 
-module.exports = Concert
+module.exports = {
+  Band,
+  Concert,
+  bandSchema,
+  concertSchema,
+};

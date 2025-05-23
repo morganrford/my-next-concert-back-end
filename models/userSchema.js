@@ -1,4 +1,5 @@
 const mongoose = require('mongoose')
+const { concertSchema } = require('./schema')
 
 const userSchema = mongoose.Schema({
   username: {
@@ -9,7 +10,7 @@ const userSchema = mongoose.Schema({
     type: String,
     required: true,
   },
-//   concerts: [concertSchema],
+  concerts: [concertSchema],
 });
 
 userSchema.set('toJSON', {

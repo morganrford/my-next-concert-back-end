@@ -1,4 +1,4 @@
-const Concert = require("../models/schema");
+const { Concert } = require("../models/schema");
 const express = require("express");
 const router = express.Router();
 
