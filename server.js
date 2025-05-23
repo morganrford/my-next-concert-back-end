@@ -33,11 +33,6 @@ app.use('/band', bandRouter)
 app.use('/auth', authRouter);
 app.use('/jwt', jwtRouter);
 
-app.use((err, req, res, next) => {
-  console.error(err.stack);
-  res.status(500).json({ error: 'Something broke!' });
-});
-
 app.get('/', (req, res) => {
   res.send('API is running');
 });
