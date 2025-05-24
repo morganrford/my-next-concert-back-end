@@ -29,7 +29,7 @@ app.use(logger('dev'));
 //Routes
 
 app.use('/concerts', concertRouter)
-app.use('/band', bandRouter)
+app.use('/bands', bandRouter)
 app.use('/auth', authRouter);
 app.use('/jwt', jwtRouter);
 
