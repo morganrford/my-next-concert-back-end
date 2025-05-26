@@ -6,9 +6,9 @@ const router = express.Router();
 router.post("/", async (req, res) => {
   try {
     const createdConcert = await Concert.create(req.body);
-    res.status(201).json(createdConcert); //201 means created
+    res.status(201).json(createdConcert);
   } catch (err) {
-    res.status(500).json({ err: err.message }); // 500 Internal Server Error
+    res.status(500).json({ err: err.message });
   }
 });
 
@@ -18,7 +18,7 @@ router.get("/", async (req, res) => {
     const foundConcerts = await Concert.find();
     res.status(200).json(foundConcerts);
   } catch (err) {
-    res.status(500).json({ err: err.message }); // 500 Internal Server Error
+    res.status(500).json({ err: err.message });
   }
 });
 
@@ -35,7 +35,7 @@ router.get("/:concertId", async (req, res) => {
     if (res.statusCode === 404) {
       res.json({ err: err.message });
     } else {
-      res.status(500).json({ err: err.message }); // 500 Internal Server Error
+      res.status(500).json({ err: err.message });
     }
   }
 });
@@ -43,7 +43,9 @@ router.get("/:concertId", async (req, res) => {
 //Delete
 router.delete("/:concertID", async (req, res) => {
   try {
-    const deletedConcert = await Concert.findByIdAndDelete(req.params.concertID);
+    const deletedConcert = await Concert.findByIdAndDelete(
+      req.params.concertID
+    );
     if (!deletedConcert) {
       res.status(404);
       throw new Error("Concert not found.");
@@ -53,7 +55,7 @@ router.delete("/:concertID", async (req, res) => {
     if (res.statusCode === 404) {
       res.json({ err: err.message });
     } else {
-      res.status(500).json({ err: err.message }); // 500 Internal Server Error
+      res.status(500).json({ err: err.message });
     }
   }
 });
@@ -61,9 +63,13 @@ router.delete("/:concertID", async (req, res) => {
 //Update
 router.put("/:concertId", async (req, res) => {
   try {
-    const updatedConcert = await Concert.findByIdAndUpdate(req.params.concertId, req.body, {
-      new: true,
-    });
+    const updatedConcert = await Concert.findByIdAndUpdate(
+      req.params.concertId,
+      req.body,
+      {
+        new: true,
+      }
+    );
     if (!updatedConcert) {
       res.status(404);
       throw new Error("Concert not found.");

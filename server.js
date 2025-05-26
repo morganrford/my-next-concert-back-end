@@ -1,44 +1,44 @@
-const dotenv = require('dotenv');
+const dotenv = require("dotenv");
 dotenv.config();
-const express = require('express');
+const express = require("express");
 const app = express();
-const mongoose = require('mongoose');
-const logger = require('morgan');
-const cors = require('cors')
+const mongoose = require("mongoose");
+const logger = require("morgan");
+const cors = require("cors");
 
-const concertRouter = require('./controllers/concerts')
-const bandRouter = require('./controllers/bands')
-const jwtRouter = require('./controllers/jwt');
-const authRouter = require('./controllers/auth');
+const concertRouter = require("./controllers/concerts");
+const bandRouter = require("./controllers/bands");
+const jwtRouter = require("./controllers/jwt");
+const authRouter = require("./controllers/auth");
 
-
-app.use(cors({
-  origin: 'http://localhost:5173',
-  credentials: true
-}));
+app.use(
+  cors({
+    origin: "http://localhost:5173",
+    credentials: true,
+  })
+);
 
 mongoose.connect(process.env.MONGODB_URI);
 
-mongoose.connection.on('connected', () => {
+mongoose.connection.on("connected", () => {
   console.log(`Connected to MongoDB ${mongoose.connection.name}.`);
 });
 
 app.use(express.json());
-app.use(logger('dev'));
+app.use(logger("dev"));
 
 //Routes
 
-app.use('/concerts', concertRouter)
-app.use('/bands', bandRouter)
-app.use('/auth', authRouter);
-app.use('/jwt', jwtRouter);
+app.use("/concerts", concertRouter);
+app.use("/bands", bandRouter);
+app.use("/auth", authRouter);
+app.use("/jwt", jwtRouter);
 
-app.get('/', (req, res) => {
-  res.send('API is running');
+app.get("/", (req, res) => {
+  res.send("API is running");
 });
 
-const PORT= 4000;
+const PORT = 4000;
 app.listen(PORT, () => {
   console.log(`The express app is ready on port ${PORT}!`);
 });
-

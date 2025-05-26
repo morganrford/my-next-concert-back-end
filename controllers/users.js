@@ -1,20 +1,18 @@
-const express = require('express');
+const express = require("express");
 const router = express.Router();
-const verifyToken = require('../middleware/verify-token');
-const User = require('../models/user');
+const verifyToken = require("../middleware/verify-token");
+const User = require("../models/user");
 
-router.get('/:userId', verifyToken, async (req, res) => {
+router.get("/:userId", verifyToken, async (req, res) => {
   try {
-    // If the user is looking for the details of another user, block the request
-    // Send a 403 status code to indicate that the user is unauthorized
-    if (req.user._id !== req.params.userId){
-      return res.status(403).json({ err: "Unauthorized"});
+    if (req.user._id !== req.params.userId) {
+      return res.status(403).json({ err: "Unauthorized" });
     }
 
     const user = await User.findById(req.params.userId);
 
     if (!user) {
-      return res.status(404).json({ err: 'User not found.'});
+      return res.status(404).json({ err: "User not found." });
     }
 
     res.json({ user });

@@ -1,6 +1,5 @@
-
-const mongoose = require('mongoose')
-const { concertSchema } = require('./schema')
+const mongoose = require("mongoose");
+const { concertSchema } = require("./schema");
 
 const userSchema = mongoose.Schema({
   username: {
@@ -14,10 +13,10 @@ const userSchema = mongoose.Schema({
   concerts: [concertSchema],
 });
 
-userSchema.set('toJSON', {
+userSchema.set("toJSON", {
   transform: (document, returnedObject) => {
     delete returnedObject.hashedPassword;
-  }
+  },
 });
 
 const User = mongoose.model("User", userSchema);

@@ -1,4 +1,4 @@
-const Band = require("../models/schema");
+const { Band } = require("../models/schema");
 const express = require("express");
 const router = express.Router();
 
@@ -6,9 +6,9 @@ const router = express.Router();
 router.post("/", async (req, res) => {
   try {
     const createdBand = await Band.create(req.body);
-    res.status(201).json(createdBand); //201 means created
+    res.status(201).json(createdBand);
   } catch (err) {
-    res.status(500).json({ err: err.message }); // 500 Internal Server Error
+    res.status(500).json({ err: err.message });
   }
 });
 
@@ -18,7 +18,7 @@ router.get("/", async (req, res) => {
     const foundBands = await Band.find();
     res.status(200).json(foundBands);
   } catch (err) {
-    res.status(500).json({ err: err.message }); // 500 Internal Server Error
+    res.status(500).json({ err: err.message });
   }
 });
 
@@ -35,7 +35,7 @@ router.get("/:bandId", async (req, res) => {
     if (res.statusCode === 404) {
       res.json({ err: err.message });
     } else {
-      res.status(500).json({ err: err.message }); // 500 Internal Server Error
+      res.status(500).json({ err: err.message });
     }
   }
 });
@@ -53,7 +53,7 @@ router.delete("/:bandID", async (req, res) => {
     if (res.statusCode === 404) {
       res.json({ err: err.message });
     } else {
-      res.status(500).json({ err: err.message }); // 500 Internal Server Error
+      res.status(500).json({ err: err.message });
     }
   }
 });
@@ -61,9 +61,13 @@ router.delete("/:bandID", async (req, res) => {
 //Update
 router.put("/:bandId", async (req, res) => {
   try {
-    const updatedBand = await Band.findByIdAndUpdate(req.params.bandId, req.body, {
-      new: true,
-    });
+    const updatedBand = await Band.findByIdAndUpdate(
+      req.params.bandId,
+      req.body,
+      {
+        new: true,
+      }
+    );
     if (!updatedBand) {
       res.status(404);
       throw new Error("Band not found.");
